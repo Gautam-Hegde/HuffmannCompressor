@@ -32,6 +32,10 @@ class HuffmanCoding:
         pass
         #add padding so that the encoded text is a multiple of 8
         #return the padded encoded text
+    def get_byte_array(self,padded_encoded_text):
+        pass
+        #convert the padded encoded text into a byte array
+        #return the byte array
 
     def compress(self):
         filename, file_extension = os.path.splitext(self.path)
@@ -50,5 +54,8 @@ class HuffmanCoding:
            encoded_text = get_encoded_text(text)
            padded_encoded_text= pad_encoded_text(encoded_text)
 
-
+            b= self.get_byte_array(padded_encoded_text)
+            output.write(bytes(b))
+        print("Compressed")
+        return output_path    
 
