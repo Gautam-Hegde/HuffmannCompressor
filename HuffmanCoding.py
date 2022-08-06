@@ -10,6 +10,8 @@ class HuffmanCoding:
         def __init__(self,char,freq):
             self.char=char
             self.freq=freq
+            self.left=None
+            self.right=None
         def __lt__(self,other):
             return self.freq<other.freq
         def __eq__(self,other):
@@ -42,6 +44,14 @@ class HuffmanCoding:
 
     def merge_codes(self):
         #build the huffman tree and save root node in heap
+        while(len(self.heap)>1):
+            node1=heapq.heappop(self.heap)
+            node2=heapq.heappop(self.heap)
+
+            merged=self.HeapNode(None,node1.freq+node2.freq)
+            merged.left=node1
+            merged.right=node2
+            heapq.heappush(self.heap,merged)
 
 
     def make_codes(self):
