@@ -53,21 +53,44 @@ class HuffmanCoding:
             merged.right=node2
             heapq.heappush(self.heap,merged)
 
+    def make_codes_helper(self,node,current_code):
+        if(node==None):
+            return 
+        if(node.char != None):
+            self.codes[node.char]=current_code
+        self.make_codes_helper(node.left,current_code+"0")
+        self.make_codes_helper(node.right,current_code+"1")
+
 
     def make_codes(self):
-        #make the codes for each character in the text
+        #make the codes for each character in the text by traversing
+        root=heapq.heappop(self.heap)
+        current_code=""
+        self.make_codes_helper(root,current_code)
+
 
 
     def get_encoded_text(self,text):
-        pass
         #replace character with code and return it
+        encoded_text=""
+        for character in text:
+            encoded_text += self.codes[character]
+        return encoded_text
 
     def pad_encoded_text(self, encoded_text):
-        pass
+        extra_padding= 8 - len(encoded_text) % 8
+        for i in range(extra_padding):
+            encoded_text += "0"
+        padded_info = "{0:08b}".format(extra_padding)
+        encoded_text = padded_info + encoded_text
         #add padding so that the encoded text is a multiple of 8
         #return the padded encoded text
     def get_byte_array(self,padded_encoded_text):
-        pass
+       b= bytearray()
+       for i in range(0,len(padded_encoded_text),8):
+            byte = padded_encoded_text[i:i+8]
+            b.append(int(byte,2))
+        return b   
         #convert the padded encoded text into a byte array
         #return the byte array
 
