@@ -1,11 +1,25 @@
 from fileinput import filename
 import os
-
+import heapq
 class HuffmanCoding:
     def __init__(self,path):
         self.path = path
         self.heap= []
         self.codes={}
+    class HeapNode:
+        def __init__(self,char,freq):
+            self.char=char
+            self.freq=freq
+        def __lt__(self,other):
+            return self.freq<other.freq
+        def __eq__(self,other):
+            #checks
+            if(other==None):
+                return False
+            if(not isinstance(other,HeapNode)):
+                return False
+            return self.freq==other.freq
+
 
     def make_frequency_dict(text):
         frequency={}
@@ -19,7 +33,11 @@ class HuffmanCoding:
 
     def make_heap(self,frequency):
         #we need to make a heap
-        pass    
+        for key in frequency:
+            node= self.HeapNode(key,frequency[key])
+            heapq.heappush(self.heap,node)
+
+          
 
 
     def merge_codes(self):
