@@ -8,7 +8,13 @@ class HuffmanCoding:
         self.codes={}
 
     def make_frequency_dict(text):
-        pass
+        frequency={}
+        for character in text:
+            if not character in frequency:
+                frequency[character]=0
+            else:
+                frequency[character]+=1
+        return frequency
         #we need to make a frequency dictionary
 
     def make_heap(self,frequency):
