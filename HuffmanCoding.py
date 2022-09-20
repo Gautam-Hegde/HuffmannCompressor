@@ -1,7 +1,6 @@
 import heapq
 import os
-
-
+#imported necessary packages.
 class HuffmanCoding:
     def __init__(self, path):
         self.path = path
